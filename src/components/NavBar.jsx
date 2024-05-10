@@ -3,8 +3,12 @@ import favicon from "../assets/favicon.svg";
 import { FaHome } from "react-icons/fa";
 import { FaBowlFood } from "react-icons/fa6";
 import { GrGallery } from "react-icons/gr";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const NavBar = () => {
+	const { user, handleSignOut } = useContext(AuthContext);
+	console.log(user)
 	const navlinkItems = [
 		{
 			name: "Home",
@@ -58,8 +62,8 @@ const NavBar = () => {
 								<NavLink
 									className={({ isActive }) =>
 										isActive
-											? "bg-green-200  text-white "
-											: "hover:bg-green-200 hover:text-white"
+											? "bg-green-600  text-white "
+											: "hover:bg-green-600 hover:text-white"
 									}
 									to={navlink.path}
 								>
@@ -94,53 +98,64 @@ const NavBar = () => {
 				</ul>
 			</div>
 			<div className="navbar-end pr-10">
-				<div className="dropdown dropdown-end">
-					<div
-						tabIndex={0}
-						role="button"
-						className="avatar btn btn-circle tooltip z-30 tooltip-left"
-						data-tip="hello"
-					>
+				{user ? (
+					<div className="dropdown dropdown-end">
 						<div
-							className="w-10 rounded-full"
-							
+							tabIndex={0}
+							role="button"
+							className="avatar btn btn-circle tooltip z-50 tooltip-left"
+							data-tip={user.displayName}
 						>
-							<img
-								alt="Tailwind CSS Navbar component"
-								src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-							/>
+							<div className="w-10 rounded-full">
+								<img
+									alt="Tailwind CSS Navbar component"
+									src={user.photoURL}
+								/>
+							</div>
 						</div>
+						<ul
+							tabIndex={0}
+							className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-bold"
+						>
+							<li>
+								<Link
+									to="/myaddedfoods"
+									className="justify-between hover:bg-green-700 hover:text-white"
+								>
+									My Added Foods
+								</Link>
+							</li>
+							<li>
+								<Link
+									to="/addfood"
+									className="justify-between hover:bg-green-700 hover:text-white"
+								>
+									Add Food Item
+								</Link>
+							</li>
+							<li>
+								<Link
+									to="/myorder"
+									className="justify-between hover:bg-green-700 hover:text-white"
+								>
+									My Ordered Food
+								</Link>
+							</li>
+							<li>
+								<button
+									onClick={handleSignOut}
+									className="justify-between hover:bg-green-700 hover:text-white"
+								>
+									Logout
+								</button>
+							</li>
+						</ul>
 					</div>
-					<ul
-						tabIndex={0}
-						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-bold"
-					>
-						<li>
-							<Link
-								to="/myaddedfoods"
-								className="justify-between hover:bg-green-700 hover:text-white"
-							>
-								My Added Foods
-							</Link>
-						</li>
-						<li>
-							<Link
-								to="/addfood"
-								className="justify-between hover:bg-green-700 hover:text-white"
-							>
-								Add Food Item
-							</Link>
-						</li>
-						<li>
-							<Link
-								to="/myorder"
-								className="justify-between hover:bg-green-700 hover:text-white"
-							>
-								My Ordered Food
-							</Link>
-						</li>
-					</ul>
-				</div>
+				) : (
+					<Link className="btn btn-outline btn-success" to="/login">
+						Login
+					</Link>
+				)}
 			</div>
 		</div>
 	);

@@ -9,6 +9,7 @@ const Footer = () => {
 					Global Palate <br />
 					Providing reliable Quisine since 2005
 				</p>
+				<p>123 Main Street, Cityville, State 12345, Country.</p>
 			</aside>
 			<nav>
 				<div className="grid grid-flow-col gap-4 text-white">
@@ -46,7 +47,9 @@ const Footer = () => {
 						</svg>
 					</a>
 				</div>
-				<p className="text-white">Copyright © 2024 - All right reserved</p>
+				<p className="text-white">
+					Copyright © 2024 - All right reserved
+				</p>
 			</nav>
 		</footer>
 	);
