@@ -1,0 +1,32 @@
+[
+	{
+		"title": "Takeaway",
+		"icon": "icon-takeaway.svg",
+		"description": "Enjoy our delicious dishes from the comfort of your home with our convenient takeaway service. Order online or by phone and pick up your order at your preferred time."
+	},
+	{
+		"title": "Digital Payment",
+		"icon": "icon-digital-payment.svg",
+		"description": "Experience hassle-free payments with our secure digital payment options. Pay for your meal conveniently using credit/debit cards, mobile wallets, or online banking."
+	},
+	{
+		"title": "Event Management",
+		"icon": "icon-event-management.svg",
+		"description": "Host memorable events with ease at our venue. Our experienced event management team will assist you in planning and executing every detail to perfection."
+	},
+	{
+		"title": "Reservation",
+		"icon": "icon-reservation.svg",
+		"description": "Ensure a seamless dining experience by making a reservation in advance. Reserve your table online or by phone to avoid waiting times."
+	},
+	{
+		"title": "Online Catering",
+		"icon": "icon-online-catering.svg",
+		"description": "Impress your guests with our delectable catering services for your special occasions. Choose from a variety of menu options and let us handle the rest."
+	},
+	{
+		"title": "Digital Waitlist",
+		"icon": "icon-digital-waitlist.svg",
+		"description": "Join our waitlist digitally and receive real-time updates on table availability. Spend less time waiting and more time enjoying your dining experience."
+	}
+]

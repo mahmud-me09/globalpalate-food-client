@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 const Root = () => {
 	return (
 		<HelmetProvider>
-			<div className="max-w-[1320px] mx-auto">
+			<div className="max-w-full mx-auto">
                 <NavBar></NavBar>
 				<Outlet></Outlet>
                 <Footer></Footer>
