@@ -6,6 +6,7 @@
 		"price": "$10.99",
 		"made_by": "Chef Giovanni",
 		"origin": "Italy",
+		"quantity": 10,
 		"description": "Pizza Margherita is a classic Italian pizza topped with tomato, mozzarella cheese, fresh basil leaves, and a drizzle of olive oil."
 	},
 	{
@@ -15,6 +16,7 @@
 		"price": "$12.50",
 		"made_by": "Chef Takashi",
 		"origin": "Japan",
+		"quantity": 5,
 		"description": "Sushi Rolls are made with vinegared rice, seaweed, and various ingredients such as fish, vegetables, and avocado, rolled together and sliced into bite-sized pieces."
 	},
 	{
@@ -24,6 +26,7 @@
 		"price": "$8.99",
 		"made_by": "Chef Sarah",
 		"origin": "United States",
+		"quantity": 2,
 		"description": "A hamburger consists of a grilled or fried patty of ground beef or alternative meat, served in a sliced bun with various toppings such as lettuce, tomato, onion, and condiments like ketchup and mustard."
 	},
 	{
@@ -33,6 +36,7 @@
 		"price": "$9.95",
 		"made_by": "Chef Somchai",
 		"origin": "Thailand",
+		"quantity": 0,
 		"description": "Pad Thai is a stir-fried rice noodle dish commonly served as a street food and in restaurants in Thailand. It typically includes ingredients such as rice noodles, tofu, shrimp, bean sprouts, peanuts, and a tangy sauce."
 	},
 	{
@@ -42,6 +46,7 @@
 		"price": "$3.50",
 		"made_by": "Chef Pierre",
 		"origin": "France",
+		"quantity": 4,
 		"description": "A croissant is a buttery, flaky, pastry of Austrian origin, named for its crescent shape. It is made of a layered yeast-leavened dough, rolled and folded several times in succession, then rolled into a sheet, in the same manner as puff pastry."
 	},
 	{
@@ -51,6 +56,7 @@
 		"price": "$7.25",
 		"made_by": "Chef Maria",
 		"origin": "Mexico",
+		"quantity": 12,
 		"description": "Tacos are traditional Mexican dishes consisting of a corn or wheat tortilla folded or rolled around a filling, which can include various meats such as beef, chicken, pork, seafood, or vegetables, along with cheese, salsa, guacamole, and other toppings."
 	},
 	{
@@ -60,6 +66,7 @@
 		"price": "$2.50",
 		"made_by": "Chef Hiroshi",
 		"origin": "Japan",
+		"quantity": 0,
 		"description": "Sushi Nigiri is a type of sushi consisting of a slice of raw fish over pressed vinegared rice. It is often served with a small amount of wasabi paste and soy sauce."
 	},
 	{
@@ -69,6 +76,7 @@
 		"price": "$11.75",
 		"made_by": "Chef Mario",
 		"origin": "Italy",
+		"quantity": 6,
 		"description": "Pasta Carbonara is a classic Italian dish made with pasta, eggs, pancetta or bacon, Parmesan cheese, and black pepper. The eggs create a creamy sauce when mixed with the hot pasta."
 	},
 	{
@@ -78,6 +86,7 @@
 		"price": "$14.99",
 		"made_by": "Chef Raj",
 		"origin": "India",
+		"quantity": 7,
 		"description": "Chicken Tikka Masala is a popular Indian dish made with marinated and grilled chicken chunks served in a rich, creamy, tomato-based sauce, flavored with Indian spices such as garam masala, cumin, and coriander."
 	},
 	{
@@ -87,6 +96,7 @@
 		"price": "$15.50",
 		"made_by": "Chef Yuki",
 		"origin": "Japan",
+		"quantity": 2,
 		"description": "Sushi Sashimi is a Japanese delicacy consisting of thinly sliced, raw fish or seafood served without rice. It is often accompanied by soy sauce, wasabi, and pickled ginger."
 	}
 ]

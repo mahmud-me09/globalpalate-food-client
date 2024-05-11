@@ -5,7 +5,7 @@ const Footer = () => {
 		<footer className="footer footer-center grid-cols-2 mt-10 p-10 bg-green-600 text-primary-content">
 			<aside>
 				<img className="h-12" src={logo} alt="" />
-				<p className="font-bold text-2xl text-white">
+				<p className="font-bold text-lg lg:text-2xl text-white">
 					Global Palate <br />
 					Providing reliable Quisine since 2005
 				</p>
