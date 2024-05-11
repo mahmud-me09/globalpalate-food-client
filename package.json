@@ -10,6 +10,10 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.11.4",
+		"@emotion/styled": "^11.11.5",
+		"@mui/material": "^5.15.17",
+		"@mui/styled-engine-sc": "^6.0.0-alpha.18",
 		"axios": "^1.6.8",
 		"firebase": "^10.11.1",
 		"leaflet": "^1.9.4",
@@ -23,7 +27,8 @@
 		"react-leaflet": "^4.2.1",
 		"react-router-dom": "^6.23.0",
 		"react-toastify": "^10.0.5",
-		"sort-by": "^1.2.0"
+		"sort-by": "^1.2.0",
+		"styled-components": "^6.1.11"
 	},
 	"devDependencies": {
 		"@types/react": "^18.2.66",

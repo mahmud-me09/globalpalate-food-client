@@ -1,7 +1,7 @@
 [
 	{
 		"name": "Pizza Margherita",
-		"image": "pizza_margherita.jpg",
+		"image": "https://i.postimg.cc/7PzVbk0N/pizzamargherita.jpg",
 		"category": "Italian Cuisine",
 		"price": "$10.99",
 		"made_by": "Chef Giovanni",
@@ -11,7 +11,7 @@
 	},
 	{
 		"name": "Sushi Rolls",
-		"image": "sushi_rolls.jpg",
+		"image": "https://i.postimg.cc/DydPdPCJ/shushi.jpg",
 		"category": "Japanese Cuisine",
 		"price": "$12.50",
 		"made_by": "Chef Takashi",
@@ -21,7 +21,7 @@
 	},
 	{
 		"name": "Hamburger",
-		"image": "hamburger.jpg",
+		"image": "https://i.postimg.cc/j2yQ1Ht1/Hamburger.jpg",
 		"category": "American Cuisine",
 		"price": "$8.99",
 		"made_by": "Chef Sarah",
@@ -31,7 +31,7 @@
 	},
 	{
 		"name": "Pad Thai",
-		"image": "pad_thai.jpg",
+		"image": "https://i.postimg.cc/VkfB70T7/PadThai.jpg",
 		"category": "Thai Cuisine",
 		"price": "$9.95",
 		"made_by": "Chef Somchai",
@@ -41,7 +41,7 @@
 	},
 	{
 		"name": "Croissant",
-		"image": "croissant.jpg",
+		"image": "https://i.postimg.cc/PrkMwRMn/Croissant.jpg",
 		"category": "French Cuisine",
 		"price": "$3.50",
 		"made_by": "Chef Pierre",
@@ -51,7 +51,7 @@
 	},
 	{
 		"name": "Tacos",
-		"image": "tacos.jpg",
+		"image": "https://i.postimg.cc/xd7vTxd7/Tacos.jpg",
 		"category": "Mexican Cuisine",
 		"price": "$7.25",
 		"made_by": "Chef Maria",
@@ -61,7 +61,7 @@
 	},
 	{
 		"name": "Sushi Nigiri",
-		"image": "sushi_nigiri.jpg",
+		"image": "https://i.postimg.cc/g2gy1kbG/Sushi-Nigiri.jpg",
 		"category": "Japanese Cuisine",
 		"price": "$2.50",
 		"made_by": "Chef Hiroshi",
@@ -71,7 +71,7 @@
 	},
 	{
 		"name": "Pasta Carbonara",
-		"image": "pasta_carbonara.jpg",
+		"image": "https://i.postimg.cc/q7gcrVpy/Pasta-Carbonara.jpg",
 		"category": "Italian Cuisine",
 		"price": "$11.75",
 		"made_by": "Chef Mario",
@@ -81,7 +81,7 @@
 	},
 	{
 		"name": "Chicken Tikka Masala",
-		"image": "chicken_tikka_masala.jpg",
+		"image": "https://i.postimg.cc/0QT0ZWRm/Chicken-Tikka-Masala.jpg",
 		"category": "Indian Cuisine",
 		"price": "$14.99",
 		"made_by": "Chef Raj",
@@ -91,7 +91,7 @@
 	},
 	{
 		"name": "Sushi Sashimi",
-		"image": "sushi_sashimi.jpg",
+		"image": "https://i.postimg.cc/ZRdr98Bq/Sushi-Sashimi.jpg",
 		"category": "Japanese Cuisine",
 		"price": "$15.50",
 		"made_by": "Chef Yuki",

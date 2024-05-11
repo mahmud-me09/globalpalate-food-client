@@ -10,9 +10,9 @@ const FoodCard = ({ food }) => {
 			<h2 className="card-title justify-center my-4  w-fit border-green-700 hover:scale-150 hover:bg-green-400">
 				{name}
 			</h2>
-			<figure>
+			<figure className="relative">
 				<img className="h-72" src={image} alt="Shoes" />
-				<figcaption className="badge badge-success p-4 text-white font-bold">
+				<figcaption className="badge badge-success absolute top-2 right-2 p-4 text-white font-bold">
 					{category}
 				</figcaption>
 			</figure>

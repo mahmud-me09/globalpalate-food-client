@@ -12,6 +12,7 @@ import MyAddedFoodPage from "../pages/myAddedFoodsPage/MyAddedFoodPage";
 import AddFoodPage from "../pages/addFoodPage/AddFoodPage";
 import MyOrderPage from "../pages/myOrder/MyOrderPage";
 import GalleryPage from "../pages/galleryPage/GalleryPage";
+import UpdateFoodPage from "../pages/updateFoodPage/UpdateFoodPage";
 
 const Router = () => {
 	const router = createBrowserRouter([
@@ -56,6 +57,10 @@ const Router = () => {
 				{
 					path: "/myorder",
 					element: <MyOrderPage></MyOrderPage>,
+				},
+				{
+					path: "/updatefood/:id",
+					element: <UpdateFoodPage></UpdateFoodPage>,
 				},
 			],
 		},

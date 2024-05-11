@@ -3,23 +3,24 @@ import { Helmet } from "react-helmet-async";
 import banner from "../../assets/AddFoodBanner.jpg";
 import axios from "axios";
 import AllFoodPageCard from "./AllFoodPageCard";
-import { useParams } from "react-router-dom";
+
 
 const AllFoodPage = () => {
 	const [foods, setFoods] = useState([]);
     const [search, setSearch] =useState('')
-	useEffect(() => {
-		axios
-			.get("./data.json")
-			.then((res) => setFoods(res.data))
-			.catch((error) => console.log(error));
-	}, [search]);
+	
 	const onSubmit = (event) => {
 		event.preventDefault();
 		const name = event.target.name.value;
 		setSearch(name);
         console.log(name)
 	};
+	useEffect(() => {
+		axios
+			.get(`http://localhost:3000/foods?name=${search}`)
+			.then((res) => setFoods(res.data))
+			.catch((error) => console.log(error));
+	}, [search]);
 	return (
 		<div>
 			<Helmet>

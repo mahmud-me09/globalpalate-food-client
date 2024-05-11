@@ -1,11 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const AddFoodPage = () => {
+const UpdateFoodPage = () => {
 	const { user } = useContext(AuthContext);
+    const [food, setFood] = useState([])
+    const {id} = useParams()
+
+    useEffect(()=>{
+        axios.get(`http://localhost:3000/foods/${id}`)
+        .then(res=> setFood(res.data));
+    },[])
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -14,7 +22,7 @@ const AddFoodPage = () => {
 		const image = form.image.value;
 		const category = form.category.value;
 		const price = form.price.value;
-		const add_by = {userName: user.displayName, email: user.email};
+		const add_by = {userName:user.displayName, email: user.email};
 		const origin = form.origin.value;
 		const quantity = form.quantity.value;
 		const description = form.description.value;
@@ -30,12 +38,12 @@ const AddFoodPage = () => {
 		};
 		console.log(formData);
 		axios
-			.post("http://localhost:3000/foods", formData)
+			.put(`http://localhost:3000/foods/${id}`, formData)
 			.then((res) => {
 				console.log(res);
-				if (res.data.insertedId) {
+				if (res.data.modifiedCount>0) {
 					form.reset();
-					toast.success("successfully added to the foodlist");
+					toast.success("successfully Updated to the foodlist");
 				}
 			})
 			.catch((error) => console.log(error.message));
@@ -44,7 +52,7 @@ const AddFoodPage = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>GlobalPalate | Add Food</title>
+				<title>GlobalPalate | Update Food</title>
 			</Helmet>
 			<section className="p-6 dark:bg-gray-100 dark:text-gray-900">
 				<form
@@ -55,9 +63,9 @@ const AddFoodPage = () => {
 				>
 					<fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-50">
 						<div className="space-y-2 col-span-full lg:col-span-1">
-							<p className="text-xl">Add Food Here</p>
+							<p className="text-xl">Update Food Here</p>
 							<p className="text-md">
-								Add food items here. The fields you have to
+								Update food items here. The fields you have to
 								enter is self explainatory. If there is a
 								problem and query feel free to reach admin on{" "}
 								<br />
@@ -74,6 +82,7 @@ const AddFoodPage = () => {
 									name="name"
 									type="text"
 									placeholder="Food Name"
+									defaultValue={food.name}
 									className="w-full rounded-md p-4 border border-green-300"
 								/>
 							</div>
@@ -85,6 +94,7 @@ const AddFoodPage = () => {
 									name="category"
 									type="text"
 									placeholder="Food Category"
+									defaultValue={food.category}
 									className="w-full rounded-md p-4 border border-green-300"
 								/>
 							</div>
@@ -101,6 +111,7 @@ const AddFoodPage = () => {
 										name="quantity"
 										type="number"
 										placeholder="Quantity"
+										defaultValue={food.quantity}
 										className="w-full rounded-md p-4 border border-green-300"
 									/>
 								</div>
@@ -112,6 +123,7 @@ const AddFoodPage = () => {
 										name="price"
 										type="text"
 										placeholder="Price"
+										defaultValue={food.price}
 										className="w-full rounded-md p-4 border border-green-300"
 									/>
 								</div>
@@ -125,6 +137,7 @@ const AddFoodPage = () => {
 										name="origin"
 										type="text"
 										placeholder="Food Origin"
+										defaultValue={food.origin}
 										className="w-full rounded-md p-4 border border-green-300"
 									/>
 								</div>
@@ -138,6 +151,7 @@ const AddFoodPage = () => {
 										name="image"
 										type="url"
 										placeholder="Food Image"
+										defaultValue={food.image}
 										className="w-full rounded-md p-4 border border-green-300"
 									/>
 								</div>
@@ -154,6 +168,7 @@ const AddFoodPage = () => {
 										name="description"
 										type="url"
 										placeholder="Food Description"
+										defaultValue={food.description}
 										className="w-full rounded-md h-40 p-4 border border-green-300"
 									/>
 								</div>
@@ -202,7 +217,7 @@ const AddFoodPage = () => {
 										Hello {user?.displayName}!
 									</h3>
 									<p className="py-4 text-center">
-										Are You sure You want to Add this Food
+										Are You sure You want to update this Food
 										to your food database?
 									</p>
 									<div className="modal-action justify-between">
@@ -229,4 +244,4 @@ const AddFoodPage = () => {
 	);
 };
 
-export default AddFoodPage;
+export default UpdateFoodPage;
