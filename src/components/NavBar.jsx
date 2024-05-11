@@ -7,8 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 const NavBar = () => {
-	const { user, handleSignOut } = useContext(AuthContext);
-	console.log(user)
+	const { user, handleSignOut } = useContext(AuthContext)
 	const navlinkItems = [
 		{
 			name: "Home",
