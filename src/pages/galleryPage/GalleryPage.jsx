@@ -7,14 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const GalleryPage = () => {
-	const [foods, setFoods] = useState([]);
+	const [feedback, setFeedback] = useState([]);
 	const { user } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		axios
-			.get("https://globalpalate-a11-server.vercel.app/foods")
-			.then((res) => setFoods(res.data))
+			.get("https://globalpalate-a11-server.vercel.app/feedback")
+			.then((res) => setFeedback(res.data))
 			.catch((error) => console.log(error.message));
 	}, []);
 
@@ -26,7 +26,7 @@ const GalleryPage = () => {
 		const formData = { user: user.displayName, photoURL, feedback };
 		console.log(formData);
 		axios
-			.post("http://localhost:5000/gallery", formData)
+			.post("http://localhost:5000/feedback", formData)
 			.then((res) => {
 				console.log(res);
 				if (res.data.insertedId) {
@@ -142,7 +142,7 @@ const GalleryPage = () => {
 			</div>
 			<section className="py-6 dark:bg-gray-100 dark:text-gray-900">
 				<div className="container grid grid-cols-2 gap-4 mx-auto md:grid-cols-4">
-					{foods.map((food) => (
+					{feedback.map((food) => (
 						<img
 							key={food._id}
 							alt=""
