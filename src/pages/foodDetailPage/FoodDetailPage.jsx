@@ -1,14 +1,13 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const FoodDetailPage = () => {
 	const { id } = useParams();
 	const [food, setFood] = useState([]);
 	const [loading, setLoading] = useState(true);
-	console.log(loading);
 	useEffect(() => {
 		axios
 			.get(`https://globalpalate-a11-server.vercel.app/foods/${id}`)
@@ -54,7 +53,9 @@ const FoodDetailPage = () => {
 							</ul>
 							<div className="flex justify-center pt-10">
 								<button className="btn btn-outline btn-success ">
-									Purchase Now!
+									<Link to="/foodpurchase">
+										Purchase Now!
+									</Link>
 								</button>
 							</div>
 						</div>

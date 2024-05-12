@@ -6,7 +6,7 @@ import {
 import { useContext, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../utils/firebase.config";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
@@ -23,6 +23,8 @@ const LoginPage = () => {
 	const [user, setUser] = useState(null);
 
 	const { signInUser } = useContext(AuthContext);
+	const location = useLocation()
+	const from = location.state || "/"
 
 	const handleShowPassword = () => {
 		setShowPassword(!showPassword);
@@ -41,7 +43,7 @@ const LoginPage = () => {
 				e.target.email.value = "";
 				e.target.password.value = "";
 				toast.success("Logged in Successfully");
-				navigate("/");
+				navigate(from, {replace:true});
 			})
 			.catch((error) => {
 				const errorCode = error.code;
@@ -56,7 +58,7 @@ const LoginPage = () => {
 				const user = result.user;
 				setUser(user);
 				toast.success("Logged in Successfully");
-				navigate("/");
+				navigate(from, { replace: true });
 			})
 			.catch((error) => {
 				console.log(error.message);
@@ -70,7 +72,7 @@ const LoginPage = () => {
 				const user = result.user;
 				setUser(user);
 				toast.success("Logged in Successfully");
-				navigate("/");
+				navigate(from, { replace: true });
 				console.log(user);
 			})
 			.catch((error) => {

@@ -1,11 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Root from "./Root";
+import PrivateRouter from "./PrivateRouter";
 import Home from "../pages/home/Home";
 import Error from "../pages/error/Error";
 import AllFoodPage from "../pages/allFoodPage/AllFoodPage";
 import FoodDetailPage from "../pages/foodDetailPage/FoodDetailPage";
-
+import FoodPurchasePage from "../pages/foodPurchasePage/FoodPurchasePage"
 import LoginPage from "../pages/loginPage/LoginPage";
 import RegistrationPage from "../pages/registrationPage/RegistrationPage";
 import MyAddedFoodPage from "../pages/myAddedFoodsPage/MyAddedFoodPage";
@@ -48,19 +49,43 @@ const Router = () => {
 				},
 				{
 					path: "/myaddedfoods",
-					element: <MyAddedFoodPage></MyAddedFoodPage>,
+					element: (
+						<PrivateRouter>
+							<MyAddedFoodPage></MyAddedFoodPage>
+						</PrivateRouter>
+					),
 				},
 				{
 					path: "/addfood",
-					element: <AddFoodPage></AddFoodPage>,
+					element: (
+						<PrivateRouter>
+							<AddFoodPage></AddFoodPage>
+						</PrivateRouter>
+					),
 				},
 				{
 					path: "/myorder",
-					element: <MyOrderPage></MyOrderPage>,
+					element: (
+						<PrivateRouter>
+							<MyOrderPage></MyOrderPage>
+						</PrivateRouter>
+					),
 				},
 				{
 					path: "/updatefood/:id",
-					element: <UpdateFoodPage></UpdateFoodPage>,
+					element: (
+						<PrivateRouter>
+							<UpdateFoodPage></UpdateFoodPage>
+						</PrivateRouter>
+					),
+				},
+				{
+					path: "/foodpurchase",
+					element: (
+						<PrivateRouter>
+							<FoodPurchasePage></FoodPurchasePage>
+						</PrivateRouter>
+					),
 				},
 			],
 		},
