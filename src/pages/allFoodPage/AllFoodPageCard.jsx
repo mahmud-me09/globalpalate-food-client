@@ -8,7 +8,7 @@ const AllFoodPageCard = ({food}) => {
 			<h2 className="card-title justify-center my-4  w-fit border-green-700 hover:scale-150 hover:bg-green-400">
 				{name}
 			</h2>
-			<figure className='relative'>
+			<figure className="relative">
 				<img className="h-72" src={image} alt="Shoes" />
 				<figcaption className="badge badge-success absolute top-2 right-2 p-4 text-white font-bold">
 					{category}
@@ -21,12 +21,16 @@ const AllFoodPageCard = ({food}) => {
 						Price: {price}
 					</div>
 				</div>
-				<div className={`badge ${quantity>0?"badge-success":"badge-error"} p-5 font-bold`}>
+				<div
+					className={`badge ${
+						quantity > 0 ? "badge-success" : "badge-error"
+					} p-5 font-bold`}
+				>
 					Available Qty: {quantity}
 				</div>
 				<div className="flex justify-center mt-5">
 					<button className="btn btn-outline btn-success">
-						<Link to={`/detailfood/${food._id}`}>See Detail</Link>
+						<Link to={`/fooddetail/${food._id}`}>See Detail</Link>
 					</button>
 				</div>
 			</div>

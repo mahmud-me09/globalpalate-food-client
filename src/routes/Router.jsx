@@ -37,7 +37,7 @@ const Router = () => {
 					path: "/gallery",
 					element: <GalleryPage></GalleryPage>,
 				},
-				
+
 				{
 					path: "/login",
 					element: <LoginPage></LoginPage>,

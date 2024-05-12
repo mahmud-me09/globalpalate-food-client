@@ -4,23 +4,26 @@ import banner from "../../assets/AddFoodBanner.jpg";
 import axios from "axios";
 import AllFoodPageCard from "./AllFoodPageCard";
 
-
 const AllFoodPage = () => {
 	const [foods, setFoods] = useState([]);
-    const [search, setSearch] =useState('')
-	
+	const [search, setSearch] = useState("");
+	const [loading, setLoading] = useState(true);
+
 	const onSubmit = (event) => {
 		event.preventDefault();
 		const name = event.target.name.value;
 		setSearch(name);
-        console.log(name)
+		setLoading(true)
 	};
 	useEffect(() => {
 		axios
 			.get(
 				`https://globalpalate-a11-server.vercel.app/foods?name=${search}`
 			)
-			.then((res) => setFoods(res.data))
+			.then((res) => {
+				setFoods(res.data);
+				setLoading(false)
+			})
 			.catch((error) => console.log(error));
 	}, [search]);
 	return (
@@ -30,7 +33,11 @@ const AllFoodPage = () => {
 			</Helmet>
 			<div>
 				<div className="relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-black before:opacity-60 mb-20">
-					<img className="w-full md:h-[371px]" src={banner} alt="Banner" />
+					<img
+						className="w-full md:h-[371px]"
+						src={banner}
+						alt="Banner"
+					/>
 					<div className="absolute text-center font-bold text-white z-10 top-[20%] lg:top-[45%] right-[35%]">
 						<h1 className="text-lg lg:text-5xl">
 							All Foods Section
@@ -53,7 +60,6 @@ const AllFoodPage = () => {
 					<div className="relative">
 						<span className="absolute inset-y-0 left-0 flex items-center pl-2">
 							<button
-                                
 								type="submit"
 								title="search"
 								className="p-1 focus:outline-none focus:ring"
@@ -77,14 +83,25 @@ const AllFoodPage = () => {
 				</fieldset>
 			</form>
 			{/* food */}
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center md:justify-between mx-auto gap-14 p-20">
-				{foods.map((food) => (
-					<AllFoodPageCard
-						key={food.name}
-						food={food}
-					></AllFoodPageCard>
-				))}
-			</div>
+			{loading ? (
+				<div className="flex justify-center relative p-10 ">
+					<div className="flex flex-col gap-4 w-52">
+						<div className="skeleton h-32 w-full"></div>
+						<div className="skeleton h-4 w-28"></div>
+						<div className="skeleton h-4 w-full"></div>
+						<div className="skeleton h-4 w-full"></div>
+					</div>
+				</div>
+			) : (
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center md:justify-between mx-auto gap-14 p-20">
+					{foods.map((food) => (
+						<AllFoodPageCard
+							key={food.name}
+							food={food}
+						></AllFoodPageCard>
+					))}
+				</div>
+			)}
 		</div>
 	);
 };

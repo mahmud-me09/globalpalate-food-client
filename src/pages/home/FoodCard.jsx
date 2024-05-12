@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 const FoodCard = ({ food }) => {
 	const { _id, name, image, category, price } = food;
 	return (
-		<div
-			className="card items-center w-full h-[576px] p-5 border border-green-600 shadow-xl"
-		>
+		<div className="card items-center w-full h-[576px] p-5 border border-green-600 shadow-xl">
 			<h2 className="card-title justify-center my-4  w-fit border-green-700 hover:scale-150 hover:bg-green-400">
 				{name}
 			</h2>
@@ -25,7 +23,7 @@ const FoodCard = ({ food }) => {
 				</div>
 				<div className="flex justify-center mt-5">
 					<button className="btn btn-outline btn-success">
-						<Link to={`/detailfood/${food._id}`}>See Detail</Link>
+						<Link to={`/fooddetail/${food._id}`}>See Detail</Link>
 					</button>
 				</div>
 			</div>
