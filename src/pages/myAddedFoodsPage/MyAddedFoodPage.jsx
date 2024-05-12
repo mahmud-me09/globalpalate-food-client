@@ -1,4 +1,3 @@
-
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
@@ -22,9 +21,11 @@ const MyAddedFoodPage = () => {
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:3000/foods?email=${user?.email}`)
+			.get(
+				`https://globalpalate-a11-server.vercel.app/foods?email=${user?.email}`
+			)
 			.then((res) => {
-				setFoods(res.data)
+				setFoods(res.data);
 				setUserUpdatedfoods(res.data);
 			});
 	}, [user]);
@@ -36,7 +37,7 @@ const MyAddedFoodPage = () => {
 
 	const handleDelete = (id) => {
 		axios
-			.delete(`http://localhost:3000/foods/${id}`)
+			.delete(`https://globalpalate-a11-server.vercel.app/foods/${id}`)
 			.then((res) => {
 				console.log(res.data);
 				if (res.data.deletedCount > 0) {
@@ -57,12 +58,24 @@ const MyAddedFoodPage = () => {
 				<Table sx={{ minWidth: 650 }} aria-label="simple table">
 					<TableHead>
 						<TableRow>
-							<TableCell>Images</TableCell>
-							<TableCell align="right">Name</TableCell>
-							<TableCell align="right">Category</TableCell>
-							<TableCell align="right">Origin</TableCell>
-							<TableCell align="right">Update</TableCell>
-							<TableCell align="right">Delete</TableCell>
+							<TableCell>
+								<h1 className="font-bold text-lg">Images</h1>
+							</TableCell>
+							<TableCell align="right">
+								<h1 className="font-bold text-lg">Name</h1>
+							</TableCell>
+							<TableCell align="right">
+								<h1 className="font-bold text-lg">Category</h1>
+							</TableCell>
+							<TableCell align="right">
+								<h1 className="font-bold text-lg">Price</h1>
+							</TableCell>
+							<TableCell align="right">
+								<h1 className="font-bold text-lg">Update</h1>
+							</TableCell>
+							<TableCell align="right">
+								<h1 className="font-bold text-lg">Delete</h1>
+							</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -76,14 +89,18 @@ const MyAddedFoodPage = () => {
 								}}
 							>
 								<TableCell component="th" scope="row">
-									<img className="h-12 w-12" src={row.image} alt={row.name} />
+									<img
+										className="h-12 w-12"
+										src={row.image}
+										alt={row.name}
+									/>
 								</TableCell>
 								<TableCell align="right">{row.name}</TableCell>
 								<TableCell align="right">
 									{row.category}
 								</TableCell>
 								<TableCell align="right">
-									{row.origin}
+									${row.price}
 								</TableCell>
 								<TableCell align="right">
 									<label

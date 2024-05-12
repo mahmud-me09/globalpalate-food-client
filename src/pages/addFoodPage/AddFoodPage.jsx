@@ -14,7 +14,7 @@ const AddFoodPage = () => {
 		const image = form.image.value;
 		const category = form.category.value;
 		const price = form.price.value;
-		const add_by = {userName: user.displayName, email: user.email};
+		const add_by = { userName: user.displayName, email: user.email };
 		const origin = form.origin.value;
 		const quantity = form.quantity.value;
 		const description = form.description.value;
@@ -30,7 +30,7 @@ const AddFoodPage = () => {
 		};
 		console.log(formData);
 		axios
-			.post("http://localhost:3000/foods", formData)
+			.post("https://globalpalate-a11-server.vercel.app/foods", formData)
 			.then((res) => {
 				console.log(res);
 				if (res.data.insertedId) {

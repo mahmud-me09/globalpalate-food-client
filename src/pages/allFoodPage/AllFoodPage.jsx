@@ -17,7 +17,9 @@ const AllFoodPage = () => {
 	};
 	useEffect(() => {
 		axios
-			.get(`http://localhost:3000/foods?name=${search}`)
+			.get(
+				`https://globalpalate-a11-server.vercel.app/foods?name=${search}`
+			)
 			.then((res) => setFoods(res.data))
 			.catch((error) => console.log(error));
 	}, [search]);

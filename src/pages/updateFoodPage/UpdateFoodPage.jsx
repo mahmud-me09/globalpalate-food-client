@@ -7,13 +7,14 @@ import { useParams } from "react-router-dom";
 
 const UpdateFoodPage = () => {
 	const { user } = useContext(AuthContext);
-    const [food, setFood] = useState([])
-    const {id} = useParams()
+	const [food, setFood] = useState([]);
+	const { id } = useParams();
 
-    useEffect(()=>{
-        axios.get(`http://localhost:3000/foods/${id}`)
-        .then(res=> setFood(res.data));
-    },[])
+	useEffect(() => {
+		axios
+			.get(`https://globalpalate-a11-server.vercel.app/foods/${id}`)
+			.then((res) => setFood(res.data));
+	}, []);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -22,7 +23,7 @@ const UpdateFoodPage = () => {
 		const image = form.image.value;
 		const category = form.category.value;
 		const price = form.price.value;
-		const add_by = {userName:user.displayName, email: user.email};
+		const add_by = { userName: user.displayName, email: user.email };
 		const origin = form.origin.value;
 		const quantity = form.quantity.value;
 		const description = form.description.value;
@@ -38,10 +39,13 @@ const UpdateFoodPage = () => {
 		};
 		console.log(formData);
 		axios
-			.put(`http://localhost:3000/foods/${id}`, formData)
+			.put(
+				`https://globalpalate-a11-server.vercel.app/foods/${id}`,
+				formData
+			)
 			.then((res) => {
 				console.log(res);
-				if (res.data.modifiedCount>0) {
+				if (res.data.modifiedCount > 0) {
 					form.reset();
 					toast.success("successfully Updated to the foodlist");
 				}
@@ -217,8 +221,8 @@ const UpdateFoodPage = () => {
 										Hello {user?.displayName}!
 									</h3>
 									<p className="py-4 text-center">
-										Are You sure You want to update this Food
-										to your food database?
+										Are You sure You want to update this
+										Food to your food database?
 									</p>
 									<div className="modal-action justify-between">
 										<input

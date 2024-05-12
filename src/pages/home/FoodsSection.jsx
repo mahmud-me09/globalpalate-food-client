@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 const FoodsSection = () => {
     const [foods,setFoods] = useState([])
     useEffect(()=>{
-        axios.get("./data.json")
-        .then(res=> setFoods(res.data))
+        axios
+			.get("https://globalpalate-a11-server.vercel.app/foods")
+			.then((res) => setFoods(res.data));
     },[])
     return (
 		<>
