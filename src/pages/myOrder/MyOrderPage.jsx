@@ -13,8 +13,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const MyOrderPage = () => {
-
-	
 	const [purchase, setPurchase] = useState([]);
 	const [userUpdatedPurchase, setUserUpdatedpurchase] = useState([]);
 	const { user } = useContext(AuthContext);
@@ -23,10 +21,10 @@ const MyOrderPage = () => {
 	useEffect(() => {
 		axios
 			.get(
-				`http://localhost:5000/purchase?email=${user?.email}`
+				`https://globalpalate-a11-server.vercel.app/purchase?email=${user?.email}`
 			)
 			.then((res) => {
-				console.log(res.data)
+				console.log(res.data);
 				setPurchase(res.data);
 				setUserUpdatedpurchase(res.data);
 				setLoading(false);

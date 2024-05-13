@@ -1,30 +1,30 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { AuthContext } from '../../providers/AuthProvider';
-import HeadingSection from '../home/HeadingSection';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../providers/AuthProvider";
+import HeadingSection from "../home/HeadingSection";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const FoodPurchasePage = () => {
-	const {user} = useContext(AuthContext)
-	const [food, setFood] = useState([])
-	const [loading, setLoading] = useState(true)
-	const {id} = useParams()
-	const navigate = useNavigate()
+	const { user } = useContext(AuthContext);
+	const [food, setFood] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const { id } = useParams();
+	const navigate = useNavigate();
 
-	useEffect(()=>{
-		axios.get(`https://globalpalate-a11-server.vercel.app/foods/${id}`)
-		.then(res=>{
-			setFood(res.data)
-			setLoading(false)
-		})
-	},[])
+	useEffect(() => {
+		axios
+			.get(`https://globalpalate-a11-server.vercel.app/foods/${id}`)
+			.then((res) => {
+				setFood(res.data);
+				setLoading(false);
+			});
+	}, []);
 
-
-	const handleSubmit = (event) =>{
+	const handleSubmit = (event) => {
 		event.preventDefault();
-		if(user.email !== food.add_by.email){
+		if (user.email !== food.add_by.email) {
 			const form = event.target;
 			const foodName = form.foodName.value;
 			const category = form.category.value;
@@ -51,21 +51,23 @@ const FoodPurchasePage = () => {
 					console.log(res);
 					if (res.data.insertedId) {
 						form.reset();
-						axios.patch(
-							`http://localhost:5000/foods/${id}`,{$inc:{purchaseCount:1}}
-						).then(res=>console.log(res.data));
+						axios
+							.patch(
+								`https://globalpalate-a11-server.vercel.app/foods/${id}`,
+								{ $inc: { purchaseCount: 1 } }
+							)
+							.then((res) => console.log(res.data));
 						toast.success("successfully added to the cart");
 						navigate("/myorder");
 					}
 				})
 				.catch((error) => console.log(error.message));
+		} else {
+			toast.error("You are the maker!!! You cannot purchase");
+			navigate("/allfood");
 		}
-		else{
-			toast.error("You are the maker!!! You cannot purchase")
-			navigate("/allfood")
-		}
-	}
-    return (
+	};
+	return (
 		<div>
 			<Helmet>
 				<title>GlobalPalate | Food Purchase</title>
@@ -113,34 +115,34 @@ const FoodPurchasePage = () => {
 							/>
 						</div>
 
-							<div className="col-span-full sm:col-span-3">
-								<label htmlFor="Quantity" className="text-sm">
-									Purchase Quantity:
-								</label>
-								<input
-									name="quantity"
-									type="number"
-									defaultValue={1}
-									max={food.quantity}
-									min={0}
-									placeholder="Quantity"
-									className="w-full rounded-md p-4 border border-green-300"
-								/>
-							</div>
-							<div className="col-span-full sm:col-span-3">
-								<label htmlFor="Price" className="text-sm">
-									Price:
-								</label>
-								<input
-									name="price"
-									type="text"
-									placeholder="Price"
-									readOnly
-									defaultValue={food.price}
-									className="w-full rounded-md p-4 border border-green-300"
-								/>
-							</div>
-						
+						<div className="col-span-full sm:col-span-3">
+							<label htmlFor="Quantity" className="text-sm">
+								Purchase Quantity:
+							</label>
+							<input
+								name="quantity"
+								type="number"
+								defaultValue={1}
+								max={food.quantity}
+								min={0}
+								placeholder="Quantity"
+								className="w-full rounded-md p-4 border border-green-300"
+							/>
+						</div>
+						<div className="col-span-full sm:col-span-3">
+							<label htmlFor="Price" className="text-sm">
+								Price:
+							</label>
+							<input
+								name="price"
+								type="text"
+								placeholder="Price"
+								readOnly
+								defaultValue={food.price}
+								className="w-full rounded-md p-4 border border-green-300"
+							/>
+						</div>
+
 						<div className="col-span-full sm:col-span-3">
 							<label htmlFor="userName" className="text-sm">
 								User name:

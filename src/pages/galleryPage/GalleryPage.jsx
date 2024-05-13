@@ -17,7 +17,7 @@ const GalleryPage = () => {
 			.get("https://globalpalate-a11-server.vercel.app/feedback")
 			.then((res) => {
 				setFeedback(res.data);
-				setLoading(false)
+				setLoading(false);
 			})
 			.catch((error) => console.log(error.message));
 	}, []);
@@ -30,7 +30,10 @@ const GalleryPage = () => {
 		const formData = { user: user.displayName, photoURL, feedback };
 		console.log(formData);
 		axios
-			.post("http://localhost:5000/feedback", formData)
+			.post(
+				"https://globalpalate-a11-server.vercel.app/feedback",
+				formData
+			)
 			.then((res) => {
 				console.log(res);
 				if (res.data.insertedId) {
