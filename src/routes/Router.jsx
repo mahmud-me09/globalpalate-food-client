@@ -80,7 +80,7 @@ const Router = () => {
 					),
 				},
 				{
-					path: "/foodpurchase",
+					path: "/foodpurchase/:id",
 					element: (
 						<PrivateRouter>
 							<FoodPurchasePage></FoodPurchasePage>

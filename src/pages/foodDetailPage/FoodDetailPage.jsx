@@ -33,7 +33,7 @@ const FoodDetailPage = () => {
 				</div>
 			) : (
 				<div className="hero max-h-screen">
-					<div className="hero-content flex-col lg:flex-row-reverse relative">
+					<div className="hero-content flex-col lg:flex-row-reverse">
 						<img
 							src={food?.image}
 							className="w-1/2 rounded-lg shadow-2xl"
@@ -51,9 +51,9 @@ const FoodDetailPage = () => {
 								<li>Made By: {food?.add_by?.userName}</li>
 								<li>Food Origin: {food?.origin}</li>
 							</ul>
-							<div className="flex justify-center pt-10">
+							<div className="flex justify-center py-10">
 								<button className="btn btn-outline btn-success ">
-									<Link to="/foodpurchase">
+									<Link to={`/foodpurchase/${food._id}`}>
 										Purchase Now!
 									</Link>
 								</button>

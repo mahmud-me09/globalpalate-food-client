@@ -2,7 +2,7 @@ import logo from "../assets/favicon.svg"
 
 const Footer = () => {
     return (
-		<footer className="footer footer-center grid-cols-2 mt-10 p-10 bg-green-600 text-primary-content relative bottom-0">
+		<footer className="footer footer-center grid-cols-2 mt-10 p-10 bg-green-600 text-primary-content">
 			<aside>
 				<img className="h-12" src={logo} alt="" />
 				<p className="font-bold text-lg lg:text-2xl text-white">
