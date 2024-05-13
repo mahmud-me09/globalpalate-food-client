@@ -30,7 +30,7 @@ const FoodPurchasePage = () => {
 			const category = form.category.value;
 			const quantity = form.quantity.value;
 			const price = form.price.value;
-			const buyingTime = Date.now();
+			const buyingTime = new Date().toISOString().split("T")[0];
 			const buyer = { userName: user.displayName, email: user.email };
 
 			const formData = {
@@ -82,7 +82,7 @@ const FoodPurchasePage = () => {
 						h1={"Purchase Here"}
 						p={""}
 					></HeadingSection>
-					<div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3 border-l border-gray-100 pl-4">
+					<div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3 border-l w-full md:w-1/2 mx-auto border border-green-600 border-dashed bg-amber-50 p-10 pl-4">
 						<div className="col-span-full sm:col-span-3">
 							<label htmlFor="foodName" className="text-sm">
 								Food name:
@@ -110,7 +110,6 @@ const FoodPurchasePage = () => {
 							/>
 						</div>
 
-						<div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
 							<div className="col-span-full sm:col-span-3">
 								<label htmlFor="Quantity" className="text-sm">
 									Purchase Quantity:
@@ -135,27 +134,7 @@ const FoodPurchasePage = () => {
 									className="w-full rounded-md p-4 border border-green-300"
 								/>
 							</div>
-						</div>
-						<div className="col-span-full lg:col-span-3">
-							<div className="col-span-full sm:col-span-3">
-								<label
-									htmlFor="purchaseTime"
-									className="text-sm"
-								>
-									Buying Date:
-								</label>
-								<input
-									name="purchaseTime"
-									type="date"
-									placeholder="Buying time"
-									defaultValue={
-										new Date().toISOString().split("T")[0]
-									}
-									className="w-full rounded-md p-4 border border-green-300"
-								/>
-							</div>
-						</div>
-
+						
 						<div className="col-span-full sm:col-span-3">
 							<label htmlFor="userName" className="text-sm">
 								User name:
@@ -184,7 +163,7 @@ const FoodPurchasePage = () => {
 						</div>
 						<label
 							htmlFor={`my_modal_submit`}
-							className="btn btn-success btn-outline col-span-full"
+							className="btn btn-success col-span-full"
 						>
 							Submit
 						</label>
