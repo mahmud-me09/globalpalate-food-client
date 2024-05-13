@@ -10,10 +10,14 @@ const FoodsSection = () => {
 		axios
 			.get("https://globalpalate-a11-server.vercel.app/foods")
 			.then((res) => {
-				setFoods(res.data);
+				let sortedFood = res.data.slice()
+					.sort((a, b) => b.purchaseCount - a.purchaseCount).slice(0,6);
+				setFoods(sortedFood);
 				setLoading(false);
+				console.log(sortedFood)
 			});
 	}, []);
+
 	return loading ? (
 		<div className="flex justify-center relative p-10 ">
 			<div className="flex flex-col gap-4 w-52">
@@ -26,9 +30,10 @@ const FoodsSection = () => {
 	) : (
 		<div>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center md:justify-between mx-auto gap-14">
-				{foods.slice(0, 6).map((food) => (
-					<FoodCard key={food.name} food={food}></FoodCard>
-				))}
+				{foods
+					.map((food) => (
+						<FoodCard key={food._id} food={food}></FoodCard>
+					))}
 			</div>
 			<div className="flex justify-center my-10 mx-auto">
 				<Link to="/allfood" className="btn btn-outline btn-success">

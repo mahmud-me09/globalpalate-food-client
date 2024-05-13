@@ -51,6 +51,9 @@ const FoodPurchasePage = () => {
 					console.log(res);
 					if (res.data.insertedId) {
 						form.reset();
+						axios.patch(
+							`http://localhost:5000/foods/${id}`,{$inc:{purchaseCount:1}}
+						).then(res=>console.log(res.data));
 						toast.success("successfully added to the cart");
 						navigate("/myorder");
 					}
@@ -117,6 +120,9 @@ const FoodPurchasePage = () => {
 								<input
 									name="quantity"
 									type="number"
+									defaultValue={1}
+									max={food.quantity}
+									min={0}
 									placeholder="Quantity"
 									className="w-full rounded-md p-4 border border-green-300"
 								/>

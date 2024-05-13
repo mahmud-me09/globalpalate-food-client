@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useParams } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const FoodDetailPage = () => {
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const [food, setFood] = useState([]);
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
@@ -14,7 +15,13 @@ const FoodDetailPage = () => {
 			.then((res) => {
 				setFood(res.data);
 				setLoading(false);
+				if(res.data.quantity<1){
+					toast.error(
+						"you can not buy this item because this item is not available"
+					);
+				}
 			});
+			
 	}, []);
 
 	return (
@@ -50,13 +57,34 @@ const FoodDetailPage = () => {
 								<li>Price: ${food?.price}</li>
 								<li>Made By: {food?.add_by?.userName}</li>
 								<li>Food Origin: {food?.origin}</li>
+								<li>Purchase Count: {food?.purchaseCount}</li>
 							</ul>
 							<div className="flex justify-center py-10">
-								<button className="btn btn-outline btn-success ">
-									<Link to={`/foodpurchase/${food._id}`}>
+								{food.quantity > 0 ? (
+									(
+										<button
+											onClick={() =>
+												navigate(
+													`/foodpurchase/${food._id}`
+												)
+											}
+											className="btn btn-outline btn-success "
+										>
+											Purchase Now!
+										</button>
+									)
+								) : (
+									<button
+										disabled
+										onClick={() =>navigate(
+														`/foodpurchase/${food._id}`
+												  )
+										}
+										className="btn btn-outline btn-success "
+									>
 										Purchase Now!
-									</Link>
-								</button>
+									</button>
+								)}
 							</div>
 						</div>
 					</div>

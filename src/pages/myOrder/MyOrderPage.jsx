@@ -60,7 +60,6 @@ const MyOrderPage = () => {
 				<Table sx={{ minWidth: 650 }} aria-label="simple table">
 					<TableHead>
 						<TableRow>
-							
 							<TableCell align="right">
 								<h1 className="font-bold text-lg">Serial</h1>
 							</TableCell>
@@ -68,7 +67,9 @@ const MyOrderPage = () => {
 								<h1 className="font-bold text-lg">Name</h1>
 							</TableCell>
 							<TableCell align="right">
-								<h1 className="font-bold text-lg">Category</h1>
+								<h1 className="font-bold text-lg">
+									Buying Date
+								</h1>
 							</TableCell>
 							<TableCell align="right">
 								<h1 className="font-bold text-lg">Price</h1>
@@ -76,7 +77,7 @@ const MyOrderPage = () => {
 							<TableCell align="right">
 								<h1 className="font-bold text-lg">Quantity</h1>
 							</TableCell>
-							
+
 							<TableCell align="right">
 								<h1 className="font-bold text-lg">Delete</h1>
 							</TableCell>
@@ -97,14 +98,12 @@ const MyOrderPage = () => {
 										},
 									}}
 								>
-									<TableCell align="right">
-										{1}
-									</TableCell>
+									<TableCell align="right">{1}</TableCell>
 									<TableCell align="right">
 										{row?.foodName}
 									</TableCell>
 									<TableCell align="right">
-										{row?.category}
+										{row?.buyingTime}
 									</TableCell>
 									<TableCell align="right">
 										${row.price}
@@ -112,7 +111,7 @@ const MyOrderPage = () => {
 									<TableCell align="right">
 										{row.quantity}
 									</TableCell>
-									
+
 									<TableCell align="right">
 										<label
 											htmlFor={`modal_${row._id}`}

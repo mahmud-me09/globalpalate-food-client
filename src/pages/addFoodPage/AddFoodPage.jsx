@@ -18,6 +18,7 @@ const AddFoodPage = () => {
 		const origin = form.origin.value;
 		const quantity = form.quantity.value;
 		const description = form.description.value;
+		const purchaseCount = 0;
 		const formData = {
 			name,
 			image,
@@ -27,6 +28,7 @@ const AddFoodPage = () => {
 			origin,
 			quantity,
 			description,
+			purchaseCount
 		};
 		console.log(formData);
 		axios
