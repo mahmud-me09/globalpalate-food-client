@@ -7,6 +7,7 @@ import {
 import { createContext, useEffect, useState } from "react";
 import auth from "../utils/firebase.config";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -15,23 +16,24 @@ const AuthProvider = ({ children }) => {
 		const savedUser = localStorage.getItem("authUser");
 		return savedUser ? JSON.parse(savedUser) : null;
 	});
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(true);
 
-	const createUser = (email, password) =>{
-		setLoading(true)
-		return createUserWithEmailAndPassword(auth, email, password)};
+	const createUser = (email, password) => {
+		setLoading(true);
+		return createUserWithEmailAndPassword(auth, email, password);
+	};
 
-	const signInUser = (email, password) =>{
-		setLoading(false)
-		return signInWithEmailAndPassword(auth, email, password)
-		};
+	const signInUser = (email, password) => {
+		setLoading(false);
+		return signInWithEmailAndPassword(auth, email, password);
+	};
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			if (currentUser) {
 				localStorage.setItem("authUser", JSON.stringify(currentUser));
 				setUser(currentUser);
-				setLoading(false)
+				setLoading(false);
 			} else {
 				localStorage.removeItem("authUser");
 				setUser(null);
@@ -41,13 +43,22 @@ const AuthProvider = ({ children }) => {
 		return () => unsubscribe();
 	}, []);
 
-	const handleSignOut = () => {
+	const handleSignOut = async () => {
+		setLoading(true);
+		const result = await axios(
+			"https://globalpalate-a11-server.vercel.app/logout",
+			{
+				withCredentials: true,
+			}
+		);
+		const data = await result.data;
+		console.log(data);
 		signOut(auth)
 			.then(() => {
 				toast.success("Successfully logged out");
+
 				localStorage.removeItem("authUser");
 				setUser(null);
-				
 			})
 			.catch((error) => {
 				console.error(error);

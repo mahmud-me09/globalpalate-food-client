@@ -18,17 +18,23 @@ const MyAddedFoodPage = () => {
 	const [foods, setFoods] = useState([]);
 	const [userUpdatedfoods, setUserUpdatedfoods] = useState([]);
 	const { user } = useContext(AuthContext);
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(true);
 
+	console.log(
+		`https://globalpalate-a11-server.vercel.app/food/${user.email}`
+	);
 	useEffect(() => {
 		axios
 			.get(
-				`https://globalpalate-a11-server.vercel.app/foods?email=${user?.email}`
+				`https://globalpalate-a11-server.vercel.app/food/${user.email}`,
+				{
+					withCredentials: true,
+				}
 			)
 			.then((res) => {
 				setFoods(res.data);
 				setUserUpdatedfoods(res.data);
-				setLoading(false)
+				setLoading(false);
 			});
 	}, [user]);
 

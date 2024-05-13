@@ -14,7 +14,7 @@ const FoodsSection = () => {
 					.sort((a, b) => b.purchaseCount - a.purchaseCount).slice(0,6);
 				setFoods(sortedFood);
 				setLoading(false);
-				console.log(sortedFood)
+				// console.log(sortedFood)
 			});
 	}, []);
 

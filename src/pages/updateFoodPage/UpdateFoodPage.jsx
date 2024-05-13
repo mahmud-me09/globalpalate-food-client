@@ -28,6 +28,7 @@ const UpdateFoodPage = () => {
 		const image = form.image.value;
 		const category = form.category.value;
 		const price = form.price.value;
+		const purchaseCount = food?.purchaseCount
 		const add_by = { userName: user.displayName, email: user.email };
 		const origin = form.origin.value;
 		const quantity = form.quantity.value;
@@ -37,6 +38,7 @@ const UpdateFoodPage = () => {
 			image,
 			category,
 			price,
+			purchaseCount,
 			add_by,
 			origin,
 			quantity,

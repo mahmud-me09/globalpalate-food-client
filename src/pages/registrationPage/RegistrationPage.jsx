@@ -8,7 +8,8 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import img from "../../assets/loginPage.svg"
+import img from "../../assets/loginPage.svg";
+import axios from "axios";
 
 const RegistrationPage = () => {
 	const navigate = useNavigate();
@@ -32,9 +33,17 @@ const RegistrationPage = () => {
 					photoURL: data.photoURL,
 				});
 			})
-			.then(() => {
+			.then((res) => {
 				toast.success("User Created Successfully");
-				setTimeout(() => navigate("/"), 2000);
+				// console.log(res)
+				axios
+					.post(
+						`https://globalpalate-a11-server.vercel.app/jwt`,
+						{ email: res?.user?.email },
+						{ withCredentials: true }
+					)
+					.then((res) => console.log(res.data));
+				navigate("/");
 				reset();
 			})
 			.catch((error) => {
@@ -194,6 +203,5 @@ const RegistrationPage = () => {
 		</>
 	);
 };
-
 
 export default RegistrationPage;

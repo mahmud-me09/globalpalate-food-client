@@ -21,7 +21,7 @@ const MyOrderPage = () => {
 	useEffect(() => {
 		axios
 			.get(
-				`https://globalpalate-a11-server.vercel.app/purchase?email=${user?.email}`
+				`https://globalpalate-a11-server.vercel.app/purchase?email=${user?.email}`, {withCredentials:true}
 			)
 			.then((res) => {
 				console.log(res.data);
@@ -87,7 +87,7 @@ const MyOrderPage = () => {
 						</div>
 					) : (
 						<TableBody>
-							{userUpdatedPurchase.map((row) => (
+							{userUpdatedPurchase.map((row, idx) => (
 								<TableRow
 									key={row._id}
 									sx={{
@@ -96,7 +96,7 @@ const MyOrderPage = () => {
 										},
 									}}
 								>
-									<TableCell align="right">{1}</TableCell>
+									<TableCell align="right">{idx+1}</TableCell>
 									<TableCell align="right">
 										{row?.foodName}
 									</TableCell>
