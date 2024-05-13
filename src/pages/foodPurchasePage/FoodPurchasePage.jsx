@@ -124,7 +124,7 @@ const FoodPurchasePage = () => {
 								type="number"
 								defaultValue={1}
 								max={food.quantity}
-								min={0}
+								min={1}
 								placeholder="Quantity"
 								className="w-full rounded-md p-4 border border-green-300"
 							/>
