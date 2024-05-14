@@ -13,9 +13,10 @@ import axios from "axios";
 
 const RegistrationPage = () => {
 	const navigate = useNavigate();
+
 	const [showPassword, setShowPassword] = useState(false);
 
-	const { createUser } = useContext(AuthContext);
+	const { createUser, setUser, setLoading } = useContext(AuthContext);
 
 	const {
 		register,
@@ -23,37 +24,30 @@ const RegistrationPage = () => {
 		formState: { errors },
 		reset,
 	} = useForm();
-	const onSubmit = (data) => {
-		createUser(data.email, data.password)
-			.then((userCredential) => {
-				const newUser = userCredential.user;
+	const onSubmit = async (data) => {
+		setLoading(true);
 
-				return updateProfile(newUser, {
-					displayName: data.Name,
-					photoURL: data.photoURL,
-				});
-			})
-			.then((res) => {
-				toast.success("User Created Successfully");
-				axios.post(`https://globalpalate-a11-server.vercel.app/user`,{
-					displayName: data.name,
-					photoURL:data.photoURL,
-					email: data.email
-				})
-				// axios
-				// 	.post(
-				// 		`https://globalpalate-a11-server.vercel.app/jwt`,
-				// 		{ email: data?.email },
-				// 		{ withCredentials: true }
-				// 	)
-				// 	.then((res) => console.log(res.data));
-				navigate("/");
-				reset();
-			})
-			.catch((error) => {
-				toast.error(`User creation failed: ${error.message}`);
-			});
+		try {
+			const newUser = {displayName: data.Name, photoURL: data.photoURL };
+			setUser(newUser); // Update UI optimistically
+
+			const userCredential = await createUser(data.email, data.password);
+			await updateProfile(userCredential.user, newUser);
+
+			toast.success("User Created Successfully");
+			axios.post(`https://globalpalate-a11-server.vercel.app/user`, {...newUser, email:data.email});
+
+			navigate("/");
+			reset();
+		} catch (error) {
+			// Revert changes if any error occurs
+			setUser(null); // Revert optimistic update
+			toast.error(`User creation failed: ${error.message}`);
+		} finally {
+			setLoading(false);
+		}
 	};
+	
 	const handleShowPassword = () => {
 		setShowPassword(!showPassword);
 	};

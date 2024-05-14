@@ -9,7 +9,11 @@ import axios from "axios";
 
 const NavBar = () => {
 	const { user, handleSignOut } = useContext(AuthContext)
-	
+	const [currentUser, setCurrentUser] = useState(null)
+	useEffect(()=>{
+		axios.get(`https://globalpalate-a11-server.vercel.app/user?email=${user?.email}`)
+		.then(res=>setCurrentUser(res.data));
+	},[])
 	const navlinkItems = [
 		{
 			name: "Home",
@@ -105,12 +109,12 @@ const NavBar = () => {
 							tabIndex={0}
 							role="button"
 							className="avatar btn btn-circle tooltip z-50 tooltip-left"
-							data-tip={user.displayName}
+							data-tip={currentUser?.displayName || user.displayName}
 						>
 							<div className="w-10 rounded-full">
 								<img
-									alt="Tailwind CSS Navbar component"
-									src={user.photoURL}
+									alt="User Image"
+									src={currentUser?.photoURL || user?.photoURL}
 								/>
 							</div>
 						</div>

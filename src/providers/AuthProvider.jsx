@@ -64,14 +64,7 @@ const AuthProvider = ({ children }) => {
 
 	const handleSignOut = async () => {
 		setLoading(true);
-		// const result = await axios.get(
-		// 	"https://globalpalate-a11-server.vercel.app/logout",
-		// 	{
-		// 		withCredentials: true,
-		// 	}
-		// );
-		// const data = await result.data;
-		// console.log(data);
+		
 		await signOut(auth)
 			.then(() => {
 				toast.success("Successfully logged out");
@@ -85,7 +78,7 @@ const AuthProvider = ({ children }) => {
 			});
 	};
 
-	const authInfo = { user, loading, createUser, signInUser, handleSignOut };
+	const authInfo = { user, loading, setLoading, setUser, createUser, signInUser, handleSignOut };
 
 	return (
 		<AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
