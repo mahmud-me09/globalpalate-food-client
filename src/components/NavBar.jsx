@@ -13,7 +13,7 @@ const NavBar = () => {
 	useEffect(()=>{
 		axios.get(`https://globalpalate-a11-server.vercel.app/user?email=${user?.email}`)
 		.then(res=>setCurrentUser(res.data));
-	},[])
+	},[user])
 	const navlinkItems = [
 		{
 			name: "Home",
