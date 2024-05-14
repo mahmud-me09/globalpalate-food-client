@@ -40,13 +40,13 @@ const RegistrationPage = () => {
 					photoURL:data.photoURL,
 					email: data.email
 				})
-				axios
-					.post(
-						`https://globalpalate-a11-server.vercel.app/jwt`,
-						{ email: data?.email },
-						{ withCredentials: true }
-					)
-					.then((res) => console.log(res.data));
+				// axios
+				// 	.post(
+				// 		`https://globalpalate-a11-server.vercel.app/jwt`,
+				// 		{ email: data?.email },
+				// 		{ withCredentials: true }
+				// 	)
+				// 	.then((res) => console.log(res.data));
 				navigate("/");
 				reset();
 			})

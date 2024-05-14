@@ -23,7 +23,7 @@ const MyAddedFoodPage = () => {
 	useEffect(() => {
 		axios
 			.get(
-				`https://globalpalate-a11-server.vercel.app/food/${user.email}`,
+				`https://globalpalate-a11-server.vercel.app/food/${user?.email}`,
 				{
 					withCredentials: true,
 				}
@@ -33,7 +33,7 @@ const MyAddedFoodPage = () => {
 				setUserUpdatedfoods(res.data);
 				setLoading(false);
 			});
-	}, [user]);
+	}, [user?.email]);
 
 	const onDelete = (id) => {
 		const remaining = foods.filter((food) => food._id !== id);
