@@ -9,11 +9,17 @@ import axios from "axios";
 
 const NavBar = () => {
 	const { user, handleSignOut } = useContext(AuthContext)
-	const [currentUser, setCurrentUser] = useState(null)
+	const [loading, setLoading] = useState(true)
+	const [currentUser, setCurrentUser] = useState({displayName:user?.displayName, email:user?.email, photoURL:user?.photoURL})
 	useEffect(()=>{
 		axios.get(`https://globalpalate-a11-server.vercel.app/user?email=${user?.email}`)
-		.then(res=>setCurrentUser(res.data));
-	},[user])
+		.then(res=>{
+			setCurrentUser(res.data)
+			console.log(res.data)
+			setLoading(false)
+		});
+	},[])
+	// console.log(currentUser)
 	const navlinkItems = [
 		{
 			name: "Home",
@@ -105,19 +111,25 @@ const NavBar = () => {
 			<div className="navbar-end pr-10">
 				{user ? (
 					<div className="dropdown dropdown-end">
+						{loading?<span className="loading loading-ring loading-sm"></span>
+						:
 						<div
 							tabIndex={0}
 							role="button"
 							className="avatar btn btn-circle tooltip z-50 tooltip-left"
-							data-tip={currentUser?.displayName || user.displayName}
+							data-tip={
+								`${user.displayName}`
+							}
 						>
 							<div className="w-10 rounded-full">
 								<img
 									alt="User Image"
-									src={currentUser?.photoURL || user?.photoURL}
+									src={
+									 user?.photoURL
+									}
 								/>
 							</div>
-						</div>
+						</div>}
 						<ul
 							tabIndex={0}
 							className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-base-100 rounded-box w-52 font-bold"

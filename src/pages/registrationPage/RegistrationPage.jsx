@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext, useState } from "react";
 import { updateProfile } from "firebase/auth";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import img from "../../assets/loginPage.svg";
@@ -13,10 +13,16 @@ import axios from "axios";
 
 const RegistrationPage = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
+	const { from } = location.state || { from: { pathname: "/" } };
 
 	const [showPassword, setShowPassword] = useState(false);
 
 	const { createUser, setUser, setLoading } = useContext(AuthContext);
+
+	const handleShowPassword = () => {
+		setShowPassword(!showPassword);
+	};
 
 	const {
 		register,
@@ -24,33 +30,45 @@ const RegistrationPage = () => {
 		formState: { errors },
 		reset,
 	} = useForm();
+
+
 	const onSubmit = async (data) => {
-		setLoading(true);
-
-		try {
-			const newUser = {displayName: data.Name, photoURL: data.photoURL };
-			setUser(newUser); // Update UI optimistically
-
-			const userCredential = await createUser(data.email, data.password);
-			await updateProfile(userCredential.user, newUser);
-
-			toast.success("User Created Successfully");
-			axios.post(`https://globalpalate-a11-server.vercel.app/user`, {...newUser, email:data.email});
-
-			navigate("/");
-			reset();
-		} catch (error) {
-			// Revert changes if any error occurs
-			setUser(null); // Revert optimistic update
-			toast.error(`User creation failed: ${error.message}`);
-		} finally {
-			setLoading(false);
-		}
+		createUser(data.email, data.password)
+			.then(async (userCredential) => {
+				const newUser = userCredential.user;
+				setUser({...newUser, displayName:data.Name, photoURL:data.photoURL})
+				return await updateProfile(newUser, {
+					displayName: data.Name,
+					photoURL: data.photoURL,
+				});
+			})
+			.then(() => {
+				toast.success("User Created Successfully");
+				
+				axios
+					.post("https://globalpalate-a11-server.vercel.app/user", {
+						email: data.email,
+						displayName: data.Name,
+						photoURL: data.photoURL,
+					})
+					.then((response) => {
+						console.log(response.data);
+						navigate(from, {replace:true});
+						reset();
+					})
+					.catch((error) => {
+						console.error("Error creating user on server:", error);
+						toast.error("User creation failed");
+					});
+				setTimeout(() => navigate(from), 2000);
+				reset();
+			})
+			.catch((error) => {
+				toast.error(`User creation failed: ${error.message}`);
+			});
 	};
-	
-	const handleShowPassword = () => {
-		setShowPassword(!showPassword);
-	};
+
+		
 
 	return (
 		<>

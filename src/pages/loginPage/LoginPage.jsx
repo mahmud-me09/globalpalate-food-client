@@ -46,7 +46,7 @@ const LoginPage = () => {
 				// 	)
 				// 	.then((res) => console.log(res.data));
 				toast.success("Logged in Successfully");
-				navigate(from); // Redirect to previous page
+				navigate(from, { replace: true }); // Redirect to previous page
 			})
 			.catch((error) => {
 				const errorCode = error.code;
@@ -67,7 +67,7 @@ const LoginPage = () => {
 				// 	)
 				// 	.then((res) => console.log(res.data));
 				toast.success("Logged in Successfully");
-				navigate(from); // Redirect to previous page
+				navigate(from, { replace: true }); // Redirect to previous page
 			})
 			.catch((error) => {
 				console.log(error.message);

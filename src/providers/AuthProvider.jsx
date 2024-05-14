@@ -29,15 +29,16 @@ const AuthProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
+		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			const userEmail = currentUser?.email || user?.email;
 			const loggedUser = { email: userEmail };
+			
 			if (currentUser) {
 				localStorage.setItem("authUser", JSON.stringify(currentUser));
 				setUser(currentUser);
 				setLoading(false);
 
-				await axios
+				axios
 					.post(
 						"https://globalpalate-a11-server.vercel.app/jwt",
 						loggedUser,
@@ -48,7 +49,7 @@ const AuthProvider = ({ children }) => {
 			} else {
 				localStorage.removeItem("authUser");
 				setUser(null);
-				await axios
+				axios
 					.post(
 						`https://globalpalate-a11-server.vercel.app/logout`,
 						loggedUser,
