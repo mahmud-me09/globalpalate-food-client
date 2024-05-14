@@ -20,7 +20,7 @@ const icon = L.icon({
 
 const FindUs = () => {
 	return (
-		<div className="w-full p-10 bg-green-50">
+		<div className="w-full p-10 -z-50 bg-green-50">
 			<MapContainer
 				center={[51.505, -0.09]}
 				zoom={13}

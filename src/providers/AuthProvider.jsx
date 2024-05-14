@@ -29,17 +29,33 @@ const AuthProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+		const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
+			const userEmail = currentUser?.email || user?.email;
+			const loggedUser = { email: userEmail };
 			if (currentUser) {
 				localStorage.setItem("authUser", JSON.stringify(currentUser));
-				
 				setUser(currentUser);
 				setLoading(false);
+
+				await axios
+					.post(
+						"https://globalpalate-a11-server.vercel.app/jwt",
+						loggedUser,
+						{ withCredentials: true }
+					)
+					.then((res) => console.log("token response", res.data))
+					.catch((error) => console.error(error.message));
 			} else {
 				localStorage.removeItem("authUser");
-				// axios.delete("https://globalpalate-a11-server.vercel.app/user")
-				// .then(res=> console.log(res.data));
 				setUser(null);
+				await axios
+					.post(
+						`https://globalpalate-a11-server.vercel.app/logout`,
+						loggedUser,
+						{ withCredentials: true }
+					)
+					.then((res) => console.log(res.data))
+					.catch((error) => console.error(error.message));
 			}
 			console.log("observing", currentUser);
 		});
@@ -48,15 +64,15 @@ const AuthProvider = ({ children }) => {
 
 	const handleSignOut = async () => {
 		setLoading(true);
-		const result = await axios(
-			"https://globalpalate-a11-server.vercel.app/logout",
-			{
-				withCredentials: true,
-			}
-		);
-		const data = await result.data;
-		console.log(data);
-		signOut(auth)
+		// const result = await axios.get(
+		// 	"https://globalpalate-a11-server.vercel.app/logout",
+		// 	{
+		// 		withCredentials: true,
+		// 	}
+		// );
+		// const data = await result.data;
+		// console.log(data);
+		await signOut(auth)
 			.then(() => {
 				toast.success("Successfully logged out");
 

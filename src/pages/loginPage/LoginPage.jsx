@@ -38,13 +38,13 @@ const LoginPage = () => {
 			.then((result) => {
 				// Signed in
 				const user = result.user;
-				axios
-					.post(
-						`https://globalpalate-a11-server.vercel.app/jwt`,
-						{ email: user?.email },
-						{ withCredentials: true }
-					)
-					.then((res) => console.log(res.data));
+				// axios
+				// 	.post(
+				// 		`https://globalpalate-a11-server.vercel.app/jwt`,
+				// 		{ email: user?.email },
+				// 		{ withCredentials: true }
+				// 	)
+				// 	.then((res) => console.log(res.data));
 				toast.success("Logged in Successfully");
 				navigate(from); // Redirect to previous page
 			})
@@ -59,13 +59,13 @@ const LoginPage = () => {
 		signInWithPopup(auth, googleProvider)
 			.then((result) => {
 				const user = result?.user;
-				axios
-					.post(
-						`https://globalpalate-a11-server.vercel.app/jwt`,
-						{ email: user?.email },
-						{ withCredentials: true }
-					)
-					.then((res) => console.log(res.data));
+				// axios
+				// 	.post(
+				// 		`https://globalpalate-a11-server.vercel.app/jwt`,
+				// 		{ email: user?.email },
+				// 		{ withCredentials: true }
+				// 	)
+				// 	.then((res) => console.log(res.data));
 				toast.success("Logged in Successfully");
 				navigate(from); // Redirect to previous page
 			})

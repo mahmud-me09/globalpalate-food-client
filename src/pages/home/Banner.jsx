@@ -10,7 +10,7 @@ const Banner = () => {
 					className="w-full lg:max-w-2xl rounded-lg shadow-2xl"
 				/>
 				<div className="min-w-sm h-full p-8 md:rounded-lg lg:rounded-e-full border border-l-8 border-green-700">
-					<h1 className="text-lg md:text-2xl lg:text-4xl font-bold leading-normal">
+					<h1 className="text-lg md:text-2xl lg:text-3xl font-bold leading-normal">
 						Experience Global Flavors
 						<br />
 						In Global Palate
