@@ -20,9 +20,6 @@ const MyAddedFoodPage = () => {
 	const { user } = useContext(AuthContext);
 	const [loading, setLoading] = useState(true);
 
-	console.log(
-		`https://globalpalate-a11-server.vercel.app/food/${user.email}`
-	);
 	useEffect(() => {
 		axios
 			.get(
@@ -38,8 +35,9 @@ const MyAddedFoodPage = () => {
 			});
 	}, [user]);
 
-	const onDelete = (prop) => {
-		const remaining = foods.filter((food) => food._id !== prop);
+	const onDelete = (id) => {
+		const remaining = foods.filter((food) => food._id !== id);
+		setFoods([...remaining]);
 		setUserUpdatedfoods([...remaining]);
 	};
 
@@ -49,14 +47,13 @@ const MyAddedFoodPage = () => {
 			.then((res) => {
 				console.log(res.data);
 				if (res.data.deletedCount > 0) {
-					toast.success("successfully Deleted from the database");
+					toast.success("Successfully deleted from the database");
 					onDelete(id);
 				}
 			})
 			.catch((error) => console.log(error.message));
 	};
 
-	console.log(userUpdatedfoods);
 	return (
 		<>
 			<Helmet>
@@ -86,21 +83,18 @@ const MyAddedFoodPage = () => {
 							</TableCell>
 						</TableRow>
 					</TableHead>
-					{loading ? (
-						<div className="w-full mx-auto px-96">
-							<span className="loading loading-bars loading-lg"></span>
-						</div>
-					) : (
-						<TableBody>
-							{userUpdatedfoods.map((row) => (
-								<TableRow
-									key={row._id}
-									sx={{
-										"&:last-child td, &:last-child th": {
-											border: 0,
-										},
-									}}
-								>
+					<TableBody>
+						{loading ? (
+							<TableRow>
+								<TableCell colSpan={6}>
+									<div className="w-full mx-auto px-96">
+										<span className="loading loading-bars loading-lg"></span>
+									</div>
+								</TableCell>
+							</TableRow>
+						) : (
+							userUpdatedfoods.map((row) => (
+								<TableRow key={row._id}>
 									<TableCell component="th" scope="row">
 										<img
 											className="h-12 w-12"
@@ -124,7 +118,6 @@ const MyAddedFoodPage = () => {
 										>
 											Update
 										</label>
-
 										<input
 											type="checkbox"
 											id={`my_modal_${row._id}`}
@@ -132,12 +125,12 @@ const MyAddedFoodPage = () => {
 										/>
 										<div className="modal" role="dialog">
 											<div className="modal-box">
-												<h3 className=" text-center font-bold text-lg">
+												<h3 className="text-center font-bold text-lg">
 													Hello! {user.displayName}
 												</h3>
 												<p className="py-4 text-center">
-													Are You sure You want to
-													Update?
+													Are you sure you want to
+													update?
 												</p>
 												<div className="modal-action justify-between">
 													<label
@@ -150,7 +143,6 @@ const MyAddedFoodPage = () => {
 													>
 														Confirm
 													</label>
-
 													<label
 														htmlFor={`my_modal_${row._id}`}
 														className="btn btn-success w-1/2"
@@ -168,7 +160,6 @@ const MyAddedFoodPage = () => {
 										>
 											Delete
 										</label>
-
 										<input
 											type="checkbox"
 											id={`modal_${row._id}`}
@@ -180,8 +171,8 @@ const MyAddedFoodPage = () => {
 													Hello! {user.displayName}
 												</h3>
 												<p className="py-4 text-center">
-													Are You sure You want to
-													Delete?
+													Are you sure you want to
+													delete?
 												</p>
 												<div className="modal-action">
 													<label
@@ -195,7 +186,6 @@ const MyAddedFoodPage = () => {
 													>
 														Confirm
 													</label>
-
 													<label
 														htmlFor={`modal_${row._id}`}
 														className="btn btn-success w-1/2"
@@ -207,9 +197,9 @@ const MyAddedFoodPage = () => {
 										</div>
 									</TableCell>
 								</TableRow>
-							))}
-						</TableBody>
-					)}
+							))
+						)}
+					</TableBody>
 				</Table>
 			</TableContainer>
 		</>

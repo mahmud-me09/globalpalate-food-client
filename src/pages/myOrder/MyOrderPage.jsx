@@ -21,7 +21,8 @@ const MyOrderPage = () => {
 	useEffect(() => {
 		axios
 			.get(
-				`https://globalpalate-a11-server.vercel.app/purchase?email=${user?.email}`, {withCredentials:true}
+				`https://globalpalate-a11-server.vercel.app/purchase?email=${user?.email}`,
+				{ withCredentials: true }
 			)
 			.then((res) => {
 				console.log(res.data);
@@ -42,7 +43,7 @@ const MyOrderPage = () => {
 			.then((res) => {
 				console.log(res.data);
 				if (res.data.deletedCount > 0) {
-					toast.success("successfully Deleted from the database");
+					toast.success("successfully Deleted from the cart");
 					onDelete(id);
 				}
 			})
@@ -81,22 +82,21 @@ const MyOrderPage = () => {
 							</TableCell>
 						</TableRow>
 					</TableHead>
-					{loading ? (
-						<div className="w-full mx-auto px-96">
-							<span className="loading loading-bars loading-lg"></span>
-						</div>
-					) : (
-						<TableBody>
-							{userUpdatedPurchase.map((row, idx) => (
-								<TableRow
-									key={row._id}
-									sx={{
-										"&:last-child td, &:last-child th": {
-											border: 0,
-										},
-									}}
-								>
-									<TableCell align="right">{idx+1}</TableCell>
+					<TableBody>
+						{loading ? (
+							<TableRow>
+								<TableCell colSpan={6}>
+									<div className="w-full mx-auto px-96">
+										<span className="loading loading-bars loading-lg"></span>
+									</div>
+								</TableCell>
+							</TableRow>
+						) : (
+							userUpdatedPurchase.map((row, idx) => (
+								<TableRow key={row._id}>
+									<TableCell align="right">
+										{idx + 1}
+									</TableCell>
 									<TableCell align="right">
 										{row?.foodName}
 									</TableCell>
@@ -156,9 +156,9 @@ const MyOrderPage = () => {
 										</div>
 									</TableCell>
 								</TableRow>
-							))}
-						</TableBody>
-					)}
+							))
+						)}
+					</TableBody>
 				</Table>
 			</TableContainer>
 		</div>

@@ -3,11 +3,13 @@ import favicon from "../assets/favicon.svg";
 import { FaHome } from "react-icons/fa";
 import { FaBowlFood } from "react-icons/fa6";
 import { GrGallery } from "react-icons/gr";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import axios from "axios";
 
 const NavBar = () => {
 	const { user, handleSignOut } = useContext(AuthContext)
+	
 	const navlinkItems = [
 		{
 			name: "Home",

@@ -32,10 +32,13 @@ const AuthProvider = ({ children }) => {
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			if (currentUser) {
 				localStorage.setItem("authUser", JSON.stringify(currentUser));
+				
 				setUser(currentUser);
 				setLoading(false);
 			} else {
 				localStorage.removeItem("authUser");
+				// axios.delete("https://globalpalate-a11-server.vercel.app/user")
+				// .then(res=> console.log(res.data));
 				setUser(null);
 			}
 			console.log("observing", currentUser);

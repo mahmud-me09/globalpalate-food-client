@@ -35,11 +35,15 @@ const RegistrationPage = () => {
 			})
 			.then((res) => {
 				toast.success("User Created Successfully");
-				// console.log(res)
+				axios.post(`https://globalpalate-a11-server.vercel.app/user`,{
+					displayName: data.name,
+					photoURL:data.photoURL,
+					email: data.email
+				})
 				axios
 					.post(
 						`https://globalpalate-a11-server.vercel.app/jwt`,
-						{ email: res?.user?.email },
+						{ email: data?.email },
 						{ withCredentials: true }
 					)
 					.then((res) => console.log(res.data));

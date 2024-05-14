@@ -3,13 +3,14 @@ import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateFoodPage = () => {
 	const { user } = useContext(AuthContext);
 	const [food, setFood] = useState([]);
 	const { id } = useParams();
 	const [loading, setLoading] = useState(true);
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		axios
@@ -55,6 +56,12 @@ const UpdateFoodPage = () => {
 				if (res.data.modifiedCount > 0) {
 					form.reset();
 					toast.success("successfully Updated to the foodlist");
+					navigate("/myaddedfoods");
+					
+				}
+				else if(res.data.modifiedCount ===0 && res.data.matchedCount>0){
+					form.reset()
+					toast.error("Nothing to update.")
 				}
 			})
 			.catch((error) => console.log(error.message));
