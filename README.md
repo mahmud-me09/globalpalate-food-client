@@ -1,4 +1,5 @@
 live Link: https://globalpalate-a11-client.web.app
+Category: Restaurant Management Website
 
 features:
 1. Moderator functionality added
