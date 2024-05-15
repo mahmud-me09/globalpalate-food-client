@@ -62,7 +62,7 @@ const MyOrderPage = () => {
 			</Helmet>
 			<div className="px-10 pt-20">
 				<div className="flex gap-8 align-bottom justify-start pb-4">
-					<h1 className="text-green-800 text-2xl font-bold">Your Purchased Foods:</h1>{" "}
+					<h1 className="text-green-800 text-2xl font-bold">My Purchased Foods:</h1>{" "}
 					<span className="badge badge-success text-white font-bold p-4"> Total: {purchase.length}</span>
 				</div>
 
