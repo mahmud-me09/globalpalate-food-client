@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import banner from "../../assets/AllFoodBanner.jpg";
 import axios from "axios";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const GalleryPage = () => {
@@ -11,6 +11,9 @@ const GalleryPage = () => {
 	const { user } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
+	const location = useLocation();
+	const from = location.pathname;
+	console.log(from)
 
 	useEffect(() => {
 		axios
@@ -74,7 +77,9 @@ const GalleryPage = () => {
 					onClick={() =>
 						user
 							? document.getElementById("my_modal_5").showModal()
-							: navigate("/login")
+							: navigate("/login", {
+									state: { from: location.pathname },
+							  })
 					}
 				>
 					Add Images and Feedback
