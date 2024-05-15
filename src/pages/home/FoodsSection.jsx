@@ -29,11 +29,10 @@ const FoodsSection = () => {
 		</div>
 	) : (
 		<div>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center md:justify-between mx-auto gap-14">
-				{foods
-					.map((food) => (
-						<FoodCard key={food._id} food={food}></FoodCard>
-					))}
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center md:justify-between mx-auto gap-8">
+				{foods.map((food) => (
+					<FoodCard key={food._id} food={food}></FoodCard>
+				))}
 			</div>
 			<div className="flex justify-center my-10 mx-auto">
 				<Link to="/allfood" className="btn btn-outline btn-success">
