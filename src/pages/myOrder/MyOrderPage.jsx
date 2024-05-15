@@ -55,112 +55,129 @@ const MyOrderPage = () => {
 			<Helmet>
 				<title>GlobalPalate | My Order</title>
 			</Helmet>
-			<TableContainer component={Paper}>
-				<Table sx={{ minWidth: 650 }} aria-label="simple table">
-					<TableHead>
-						<TableRow>
-							<TableCell align="right">
-								<h1 className="font-bold text-lg">Serial</h1>
-							</TableCell>
-							<TableCell align="right">
-								<h1 className="font-bold text-lg">Name</h1>
-							</TableCell>
-							<TableCell align="right">
-								<h1 className="font-bold text-lg">
-									Buying Date
-								</h1>
-							</TableCell>
-							<TableCell align="right">
-								<h1 className="font-bold text-lg">Price</h1>
-							</TableCell>
-							<TableCell align="right">
-								<h1 className="font-bold text-lg">Quantity</h1>
-							</TableCell>
+			<div className="px-10 pt-20">
+				<div className="flex gap-8 align-bottom justify-start pb-4">
+					<h1 className="text-green-800 text-2xl font-bold">Your Purchased Foods:</h1>{" "}
+					<span className="badge badge-success text-white font-bold p-4"> Total: {purchase.length}</span>
+				</div>
 
-							<TableCell align="right">
-								<h1 className="font-bold text-lg">Delete</h1>
-							</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{loading ? (
+				<TableContainer component={Paper}>
+					<Table sx={{ minWidth: 650 }} aria-label="simple table">
+						<TableHead className="bg-green-50 border">
 							<TableRow>
-								<TableCell colSpan={6}>
-									<div className="w-full mx-auto px-96">
-										<span className="loading loading-bars loading-lg"></span>
-									</div>
+								<TableCell align="right">
+									<h1 className="font-bold text-lg">
+										Serial
+									</h1>
+								</TableCell>
+								<TableCell align="right">
+									<h1 className="font-bold text-lg">Name</h1>
+								</TableCell>
+								<TableCell align="right">
+									<h1 className="font-bold text-lg">
+										Buying Date
+									</h1>
+								</TableCell>
+								<TableCell align="right">
+									<h1 className="font-bold text-lg">Price</h1>
+								</TableCell>
+								<TableCell align="right">
+									<h1 className="font-bold text-lg">
+										Quantity
+									</h1>
+								</TableCell>
+
+								<TableCell align="right">
+									<h1 className="font-bold text-lg">
+										Delete
+									</h1>
 								</TableCell>
 							</TableRow>
-						) : (
-							userUpdatedPurchase.map((row, idx) => (
-								<TableRow key={row._id}>
-									<TableCell align="right">
-										{idx + 1}
-									</TableCell>
-									<TableCell align="right">
-										{row?.foodName}
-									</TableCell>
-									<TableCell align="right">
-										{row?.buyingTime}
-									</TableCell>
-									<TableCell align="right">
-										${row.price}
-									</TableCell>
-									<TableCell align="right">
-										{row.quantity}
-									</TableCell>
-
-									<TableCell align="right">
-										<label
-											htmlFor={`modal_${row._id}`}
-											className="btn my-4 text-black bg-red-500"
-										>
-											Delete
-										</label>
-
-										<input
-											type="checkbox"
-											id={`modal_${row._id}`}
-											className="modal-toggle"
-										/>
-										<div className="modal" role="dialog">
-											<div className="modal-box">
-												<h3 className="font-bold text-center text-lg">
-													Hello! {user.displayName}
-												</h3>
-												<p className="py-4 text-center">
-													Are You sure You want to
-													Delete?
-												</p>
-												<div className="modal-action">
-													<label
-														onClick={() =>
-															handleDelete(
-																row._id
-															)
-														}
-														htmlFor={`modal_${row._id}`}
-														className="btn btn-error w-1/2"
-													>
-														Confirm
-													</label>
-
-													<label
-														htmlFor={`modal_${row._id}`}
-														className="btn btn-success w-1/2"
-													>
-														Exit!
-													</label>
-												</div>
-											</div>
+						</TableHead>
+						<TableBody>
+							{loading ? (
+								<TableRow>
+									<TableCell colSpan={6}>
+										<div className="w-full mx-auto px-96">
+											<span className="loading loading-bars loading-lg"></span>
 										</div>
 									</TableCell>
 								</TableRow>
-							))
-						)}
-					</TableBody>
-				</Table>
-			</TableContainer>
+							) : (
+								userUpdatedPurchase.map((row, idx) => (
+									<TableRow key={row._id}>
+										<TableCell align="right">
+											{idx + 1}
+										</TableCell>
+										<TableCell align="right">
+											{row?.foodName}
+										</TableCell>
+										<TableCell align="right">
+											{row?.buyingTime}
+										</TableCell>
+										<TableCell align="right">
+											${row.price}
+										</TableCell>
+										<TableCell align="right">
+											{row.quantity}
+										</TableCell>
+
+										<TableCell align="right">
+											<label
+												htmlFor={`modal_${row._id}`}
+												className="btn my-4 text-black bg-red-500"
+											>
+												Delete
+											</label>
+
+											<input
+												type="checkbox"
+												id={`modal_${row._id}`}
+												className="modal-toggle"
+											/>
+											<div
+												className="modal"
+												role="dialog"
+											>
+												<div className="modal-box">
+													<h3 className="font-bold text-center text-lg">
+														Hello!{" "}
+														{user.displayName}
+													</h3>
+													<p className="py-4 text-center">
+														Are You sure You want to
+														Delete?
+													</p>
+													<div className="modal-action">
+														<label
+															onClick={() =>
+																handleDelete(
+																	row._id
+																)
+															}
+															htmlFor={`modal_${row._id}`}
+															className="btn btn-error w-1/2"
+														>
+															Confirm
+														</label>
+
+														<label
+															htmlFor={`modal_${row._id}`}
+															className="btn btn-success w-1/2"
+														>
+															Exit!
+														</label>
+													</div>
+												</div>
+											</div>
+										</TableCell>
+									</TableRow>
+								))
+							)}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			</div>
 		</div>
 	);
 };
