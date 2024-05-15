@@ -55,7 +55,7 @@ const FoodPurchasePage = () => {
 						axios
 							.patch(
 								`https://globalpalate-a11-server.vercel.app/foods/${id}`,
-								{ $inc: { purchaseCount: 1 } },
+								{ $inc: { purchaseCount: 1 } }
 							)
 							.then((res) => console.log(res.data));
 						toast.success("successfully added to the cart");
