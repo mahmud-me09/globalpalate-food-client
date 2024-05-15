@@ -17,9 +17,9 @@ const UpdateFoodPage = () => {
 			.get(`https://globalpalate-a11-server.vercel.app/foods/${id}`)
 			.then((res) => {
 				setFood(res.data);
-				setLoading(false)
+				setLoading(false);
 			})
-			.catch(error=>console.log(error.message));
+			.catch((error) => console.log(error.message));
 	}, []);
 
 	const handleSubmit = (event) => {
@@ -49,7 +49,10 @@ const UpdateFoodPage = () => {
 		axios
 			.put(
 				`https://globalpalate-a11-server.vercel.app/foods/${id}`,
-				formData
+				formData,
+				{
+					withCredentials: true,
+				}
 			)
 			.then((res) => {
 				console.log(res);
@@ -57,11 +60,12 @@ const UpdateFoodPage = () => {
 					form.reset();
 					toast.success("successfully Updated to the foodlist");
 					navigate("/myaddedfoods");
-					
-				}
-				else if(res.data.modifiedCount ===0 && res.data.matchedCount>0){
-					form.reset()
-					toast.error("Nothing to update.")
+				} else if (
+					res.data.modifiedCount === 0 &&
+					res.data.matchedCount > 0
+				) {
+					form.reset();
+					toast.error("Nothing to update.");
 				}
 			})
 			.catch((error) => console.log(error.message));

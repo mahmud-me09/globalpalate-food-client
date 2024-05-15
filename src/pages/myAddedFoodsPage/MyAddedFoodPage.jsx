@@ -43,7 +43,7 @@ const MyAddedFoodPage = () => {
 
 	const handleDelete = (id) => {
 		axios
-			.delete(`https://globalpalate-a11-server.vercel.app/foods/${id}`)
+			.delete(`https://globalpalate-a11-server.vercel.app/foods/${id}`, {withCredentials:true})
 			.then((res) => {
 				console.log(res.data);
 				if (res.data.deletedCount > 0) {

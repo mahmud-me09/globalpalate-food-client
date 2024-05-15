@@ -45,7 +45,8 @@ const FoodPurchasePage = () => {
 			axios
 				.post(
 					"https://globalpalate-a11-server.vercel.app/purchase",
-					formData
+					formData,
+					{ withCredentials: true }
 				)
 				.then((res) => {
 					console.log(res);
@@ -54,7 +55,7 @@ const FoodPurchasePage = () => {
 						axios
 							.patch(
 								`https://globalpalate-a11-server.vercel.app/foods/${id}`,
-								{ $inc: { purchaseCount: 1 } }
+								{ $inc: { purchaseCount: 1 } },
 							)
 							.then((res) => console.log(res.data));
 						toast.success("successfully added to the cart");

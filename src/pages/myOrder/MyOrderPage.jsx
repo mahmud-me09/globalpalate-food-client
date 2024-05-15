@@ -39,7 +39,12 @@ const MyOrderPage = () => {
 
 	const handleDelete = (id) => {
 		axios
-			.delete(`https://globalpalate-a11-server.vercel.app/purchase/${id}`)
+			.delete(
+				`https://globalpalate-a11-server.vercel.app/purchase/${id}`,
+				{
+					withCredentials: true,
+				}
+			)
 			.then((res) => {
 				console.log(res.data);
 				if (res.data.deletedCount > 0) {

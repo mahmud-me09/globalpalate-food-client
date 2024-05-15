@@ -32,7 +32,13 @@ const AddFoodPage = () => {
 		};
 		console.log(formData);
 		axios
-			.post("https://globalpalate-a11-server.vercel.app/foods", formData)
+			.post(
+				"https://globalpalate-a11-server.vercel.app/foods",
+				formData,
+				{
+					withCredentials: true,
+				}
+			)
 			.then((res) => {
 				console.log(res);
 				if (res.data.insertedId) {
